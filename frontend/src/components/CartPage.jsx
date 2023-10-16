@@ -35,7 +35,7 @@ function CartPage({ cart, setCart }) {
   };
 
   return (
-    <div>
+    <div className="checkout">
       <h1>Kundvagn</h1>
       {cart.length === 0 ? (
         <p>Kundvagnen är tom.</p>

@@ -1,5 +1,43 @@
+h1 {
+  justify-content: center;
+  font-size: 50px;
+  display: flex;
+}
+
+.navbar {
+  justify-content: center;
+  margin: 20px 0;
+  font-size: 40px;
+  display: flex;
+}
+
+.navbar ul {
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+
+.navbar li {
+  margin-right: 50px;
+}
+
+.navbar a {
+  color: #333;
+  text-decoration: none;
+  transition: color .3s;
+}
+
+.navbar a:hover {
+  color: #e62626;
+}
+
+.nav-item {
+  font-size: 70px;
+}
+
 .product-card-container {
   flex-wrap: wrap;
+  justify-content: center;
   display: flex;
 }
 
@@ -41,6 +79,17 @@
 .product-card button:disabled {
   cursor: not-allowed;
   background-color: #ccc;
+}
+
+.checkout {
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  display: flex;
+}
+
+.checkout button {
+  margin: 10px;
 }
 
 /*# sourceMappingURL=index.6e2692ac.css.map */

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function Navbar({ cartItemCount }) {
   return (
-    <nav>
+    <nav className='navbar'>
       <ul>
         <li>
           <Link to="/">Produkter</Link>
