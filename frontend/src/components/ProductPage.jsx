@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 
-
-function ProductPage() {
-  const [cart, setCart] = useState([]); // State för kundvagnen
+function ProductPage({ cart, setCart }) {
   const [products, setProducts] = useState([]);
   const [status, setStatus] = useState("loading");
 
+  useEffect(() => {
+    // Hämta produkter från din backend när komponenten mountas
+    fetchProducts();
+  }, []);
 
   async function fetchProducts() {
     try {
@@ -23,18 +25,20 @@ function ProductPage() {
     }
   }
 
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
-
   const addToCart = (product) => {
     if (product.stock > 0) {
+      // Uppdatera kundvagnen
       setCart([...cart, product]);
+
+      // Uppdatera lagersaldot i din products-lista
+      const updatedProducts = [...products];
+      const productIndex = updatedProducts.findIndex((p) => p.id === product.id);
+      if (productIndex !== -1) {
+        updatedProducts[productIndex].stock -= 1;
+        setProducts(updatedProducts);
+      }
     }
   }
-
 
   return (
     <div>
@@ -42,11 +46,10 @@ function ProductPage() {
       {status === "loading" && <p>Laddar produkter...</p>}
       {status === "error" && <p>Ett fel uppstod vid hämtningen av produkter.</p>}
 
-
       {status === "ok" && (
         <div className="product-card-container">
           {products.map((product) => (
-             <div key={product.id} className="product-card"> {}
+            <div key={product.id} className="product-card">
               <h2>{product.name}</h2>
               <img src={product.image} alt={product.name} />
               <p>Pris: {product.price} kr</p>
@@ -63,6 +66,5 @@ function ProductPage() {
     </div>
   );
 }
-
 
 export default ProductPage;
