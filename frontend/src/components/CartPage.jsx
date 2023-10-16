@@ -1,30 +1,31 @@
 import React from "react";
 
 function CartPage({ cart, setCart }) {
-  // Beräkna totalpriset baserat på produkterna i kundvagnen
   const total = cart.reduce((acc, product) => acc + product.price, 0);
 
-  // Genomför köpet
-  const checkout = () => {
-    // Uppdatera lagersaldot för varje produkt
-    const updatedCart = [...cart];
-    updatedCart.forEach((cartProduct) => {
-      const productIndex = products.findIndex(
-        (product) => product.id === cartProduct.id
-      );
-      if (productIndex !== -1) {
-        products[productIndex].stock -= 1;
+  const checkout = async () => {
+    try {
+      // Gör en POST-förfrågan till servern för att slutföra köpet
+      const response = await fetch("http://localhost:3000/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ productId: cart[0].id }), // Skicka produktens id eller annan relevant data
+      });
+
+      if (response.ok) {
+        // Om köpet lyckades, rensa kundvagnen
+        setCart([]);
+        alert("Köpet har genomförts!");
+      } else {
+        alert("Ett fel uppstod vid genomförandet av köpet.");
       }
-    });
-
-    // Uppdatera lagersaldot i state
-    setCart([]);
-
-    // Visa meddelande om att köpet har genomförts
-    alert("Köpet har genomförts!");
-  };
-
-  // Töm kundvagnen
+    } catch (error) {
+      console.error(error);
+      alert("Ett fel uppstod.");
+    }
+  }
   const clearCart = () => {
     setCart([]);
   };
@@ -52,3 +53,4 @@ function CartPage({ cart, setCart }) {
 }
 
 export default CartPage;
+

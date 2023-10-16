@@ -1,17 +1,15 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Navbar from './Navbar';
-import CartPage from './CartPage';
-import ProductPage from './productPage'; // Använd stor bokstav i 'ProductPage'
-
+import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Navbar from "./Navbar";
+import CartPage from "./CartPage";
+import ProductPage from "./productPage";
 
 function App() {
   const [cart, setCart] = useState([]);
 
-
   return (
     <Router>
-      <div> {/* Du måste ha en omgivande div eller annat element som omsluter ditt innehåll */}
+      <div>
         <Navbar cartItemCount={cart.length} />
         <Routes>
           <Route path="/" element={<ProductPage cart={cart} setCart={setCart} />} />
@@ -21,6 +19,5 @@ function App() {
     </Router>
   );
 }
-
 
 export default App;

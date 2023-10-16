@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function ProductPage({ cart, setCart }) {
   const [products, setProducts] = useState([]);
   const [status, setStatus] = useState("loading");
-
-  useEffect(() => {
-    // Hämta produkter från din backend när komponenten mountas
-    fetchProducts();
-  }, []);
 
   async function fetchProducts() {
     try {
@@ -25,18 +21,13 @@ function ProductPage({ cart, setCart }) {
     }
   }
 
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
   const addToCart = (product) => {
     if (product.stock > 0) {
-      // Uppdatera kundvagnen
       setCart([...cart, product]);
-
-      // Uppdatera lagersaldot i din products-lista
-      const updatedProducts = [...products];
-      const productIndex = updatedProducts.findIndex((p) => p.id === product.id);
-      if (productIndex !== -1) {
-        updatedProducts[productIndex].stock -= 1;
-        setProducts(updatedProducts);
-      }
     }
   }
 

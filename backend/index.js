@@ -1,22 +1,31 @@
-const fs = require('fs'); // File system
+const fs = require('fs');
 const express = require('express');
+const cors = require('cors'); 
+
 const app = express();
 app.use(express.json());
+app.use(cors());
 
-// Allow cross-origin requests (CORS)
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
 
+// Läs in produktlistan vid start
+let products = [];
+
+try {
+  const rawProduct = fs.readFileSync('./data/product.json');
+  products = JSON.parse(rawProduct);
+} catch (e) {
+  console.error('Fel vid inläsning av produktlistan', e);
+}
+
 app.get('/product', (req, res) => {
   let body = [];
 
   try {
-    const rawProduct = fs.readFileSync('./data/product.json');
-    const products = JSON.parse(rawProduct);
-
     if (req.query.name != undefined) {
       const queryName = req.query.name.toLowerCase();
 
@@ -36,11 +45,11 @@ app.get('/product', (req, res) => {
   res.send(body);
 });
 
-app.post('/purchase', (req, res) => {
+app.post('/checkout', (req, res) => {
   try {
-    const rawProduct = fs.readFileSync('./data/product.json');
-    const products = JSON.parse(rawProduct);
     const { productId } = req.body;
+
+    // Hämta produkten från din produktlista
     const product = products.find((p) => p.id === productId);
 
     if (!product) {
@@ -51,10 +60,15 @@ app.post('/purchase', (req, res) => {
       return res.status(400).json({ error: 'Produkten är slut i lager' });
     }
 
+    // Uppdatera lagersaldot
     product.stock -= 1;
+
+    // Spara ändringarna till produktlistan (till exempel i en JSON-fil)
     fs.writeFileSync('./data/product.json', JSON.stringify(products, null, 2));
+
+    // Skicka ett svar till klienten
     res.json({ message: 'Köpet genomfördes', product });
-  } catch (e) {
+  } catch (error) {
     res.status(500).json({ error: 'Något gick fel' });
   }
 });
