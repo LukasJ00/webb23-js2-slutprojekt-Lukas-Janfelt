@@ -44,7 +44,7 @@ function ProductPage({ cart, setCart }) {
               <h2>{product.name}</h2>
               <img src={product.image} alt={product.name} />
               <p>Pris: {product.price} kr</p>
-              <p>Lagersaldo: {product.stock}</p>
+              <p>Lager: {product.stock}</p>
               {product.stock > 0 ? (
                 <button onClick={() => addToCart(product)}>Lägg till i kundvagnen</button>
               ) : (

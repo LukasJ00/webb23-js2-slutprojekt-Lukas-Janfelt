@@ -1,44 +1,44 @@
 [
   {
     "id": 1,
-    "name": "Produkt 1",
-    "image": "product1.jpg",
-    "price": 10.99,
-    "stock": 9
+    "name": "Piano",
+    "image": "https://images.pexels.com/photos/1021142/pexels-photo-1021142.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "price": 20000,
+    "stock": 8
   },
   {
     "id": 2,
-    "name": "Produkt 2",
-    "image": "product2.jpg",
-    "price": 10.99,
-    "stock": 9
+    "name": "Elgitarr",
+    "image": "https://images.pexels.com/photos/7334396/pexels-photo-7334396.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "price": 4999,
+    "stock": 8
   },
   {
     "id": 3,
-    "name": "Produkt 3",
-    "image": "product3.jpg",
-    "price": 10.99,
-    "stock": 9
+    "name": "Fiol",
+    "image": "https://images.pexels.com/photos/11970796/pexels-photo-11970796.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "price": 1699,
+    "stock": 8
   },
   {
     "id": 4,
-    "name": "Produkt 4",
-    "image": "product4.jpg",
-    "price": 10.99,
-    "stock": 9
+    "name": "Alto-Saxophone",
+    "image": "https://images.pexels.com/photos/164936/pexels-photo-164936.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "price": 10000,
+    "stock": 8
   },
   {
     "id": 5,
-    "name": "Produkt 5",
-    "image": "product5.jpg",
-    "price": 10.99,
-    "stock": 9
+    "name": "Trumset",
+    "image": "https://images.pexels.com/photos/13185330/pexels-photo-13185330.jpeg",
+    "price": 7500,
+    "stock": 8
   },
   {
     "id": 6,
-    "name": "Produkt 6",
-    "image": "product6.jpg",
-    "price": 10.99,
+    "name": "Akustiskt Gitarr",
+    "image": "https://images.pexels.com/photos/3660866/pexels-photo-3660866.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "price": 2500,
     "stock": 8
   }
 ]
