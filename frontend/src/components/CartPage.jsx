@@ -5,17 +5,20 @@ function CartPage({ cart, setCart }) {
 
   const checkout = async () => {
     try {
-      // Gör en POST-förfrågan till servern för att slutföra köpet
+      // Hämta en array med alla produkt-ID:n från kundvagnen
+      const productIds = cart.map((product) => product.id);
+
+      // Gör en POST-förfrågan till servern för att uppdatera lagersaldot för alla produkter
       const response = await fetch("http://localhost:3000/checkout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ productId: cart[0].id }), // Skicka produktens id eller annan relevant data
+        body: JSON.stringify({ productIds }), // Skicka produkt-ID:n till servern
       });
 
       if (response.ok) {
-        // Om köpet lyckades, rensa kundvagnen
+        // Om uppdateringen lyckades, rensa kundvagnen
         setCart([]);
         alert("Köpet har genomförts!");
       } else {
@@ -26,6 +29,7 @@ function CartPage({ cart, setCart }) {
       alert("Ett fel uppstod.");
     }
   }
+
   const clearCart = () => {
     setCart([]);
   };
@@ -53,4 +57,3 @@ function CartPage({ cart, setCart }) {
 }
 
 export default CartPage;
-

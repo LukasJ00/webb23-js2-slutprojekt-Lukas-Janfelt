@@ -47,27 +47,22 @@ app.get('/product', (req, res) => {
 
 app.post('/checkout', (req, res) => {
   try {
-    const { productId } = req.body;
+    const { productIds } = req.body;
 
-    // Hämta produkten från din produktlista
-    const product = products.find((p) => p.id === productId);
+    // Loopa igenom alla produkt-ID:n och uppdatera lagersaldot för varje produkt
+    productIds.forEach((productId) => {
+      const product = products.find((p) => p.id === productId);
 
-    if (!product) {
-      return res.status(404).json({ error: 'Produkten hittades inte' });
-    }
-
-    if (product.stock <= 0) {
-      return res.status(400).json({ error: 'Produkten är slut i lager' });
-    }
-
-    // Uppdatera lagersaldot
-    product.stock -= 1;
+      if (product && product.stock > 0) {
+        product.stock -= 1;
+      }
+    });
 
     // Spara ändringarna till produktlistan (till exempel i en JSON-fil)
     fs.writeFileSync('./data/product.json', JSON.stringify(products, null, 2));
 
     // Skicka ett svar till klienten
-    res.json({ message: 'Köpet genomfördes', product });
+    res.json({ message: 'Köpet genomfördes', productIds });
   } catch (error) {
     res.status(500).json({ error: 'Något gick fel' });
   }

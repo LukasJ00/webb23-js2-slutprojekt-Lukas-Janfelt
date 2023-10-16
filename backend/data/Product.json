@@ -32,13 +32,13 @@
     "name": "Produkt 5",
     "image": "product5.jpg",
     "price": 10.99,
-    "stock": 10
+    "stock": 9
   },
   {
     "id": 6,
     "name": "Produkt 6",
     "image": "product6.jpg",
     "price": 10.99,
-    "stock": 9
+    "stock": 8
   }
 ]
