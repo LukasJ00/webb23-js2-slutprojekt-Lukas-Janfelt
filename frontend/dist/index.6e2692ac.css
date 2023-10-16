@@ -1,10 +1,16 @@
+.product-card-container {
+  flex-wrap: wrap;
+  display: flex;
+}
+
 .product-card {
+  text-align: center;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 300px;
+  flex-direction: column;
+  width: 200px;
   margin: 10px;
   padding: 10px;
-  display: inline-block;
+  display: flex;
 }
 
 .product-card h2 {
@@ -13,8 +19,11 @@
 }
 
 .product-card img {
+  flex: 1;
   max-width: 100%;
-  height: auto;
+  max-height: 200px;
+  margin: 0 auto;
+  display: block;
 }
 
 .product-card p {

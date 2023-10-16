@@ -38,21 +38,21 @@ function ProductPage({ cart, setCart }) {
       {status === "error" && <p>Ett fel uppstod vid hämtningen av produkter.</p>}
 
       {status === "ok" && (
-        <div className="product-card-container">
-          {products.map((product) => (
-            <div key={product.id} className="product-card">
-              <h2>{product.name}</h2>
-              <img src={product.image} alt={product.name} />
-              <p>Pris: {product.price} kr</p>
-              <p>Lager: {product.stock}</p>
-              {product.stock > 0 ? (
-                <button onClick={() => addToCart(product)}>Lägg till i kundvagnen</button>
-              ) : (
-                <p>Slut i lager</p>
-              )}
-            </div>
-          ))}
-        </div>
+       <div className="product-card-container">
+       {products.map((product) => (
+         <div key={product.id} className="product-card">
+           <h2>{product.name}</h2>
+           <img src={product.image} alt={product.name} />
+           <p>Pris: {product.price} kr</p>
+           <p>Lagersaldo: {product.stock}</p>
+           {product.stock > 0 ? (
+             <button onClick={() => addToCart(product)}>Lägg till i kundvagnen</button>
+           ) : (
+             <p>Slut i lager</p>
+           )}
+         </div>
+       ))}
+     </div>
       )}
     </div>
   );
