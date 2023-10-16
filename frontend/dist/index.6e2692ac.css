@@ -1,0 +1,37 @@
+.product-card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 300px;
+  margin: 10px;
+  padding: 10px;
+  display: inline-block;
+}
+
+.product-card h2 {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+.product-card img {
+  max-width: 100%;
+  height: auto;
+}
+
+.product-card p {
+  margin: 5px 0;
+}
+
+.product-card button {
+  color: #fff;
+  cursor: pointer;
+  background-color: #007bff;
+  border: none;
+  padding: 5px 10px;
+}
+
+.product-card button:disabled {
+  cursor: not-allowed;
+  background-color: #ccc;
+}
+
+/*# sourceMappingURL=index.6e2692ac.css.map */
