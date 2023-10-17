@@ -27163,12 +27163,13 @@ var _navbar = require("./Navbar");
 var _navbarDefault = parcelHelpers.interopDefault(_navbar);
 var _cartPage = require("./CartPage");
 var _cartPageDefault = parcelHelpers.interopDefault(_cartPage);
-var _productPage = require("./productPage");
+var _productPage = require("./ProductPage");
 var _productPageDefault = parcelHelpers.interopDefault(_productPage);
 var _s = $RefreshSig$();
 function App() {
     _s();
     const [cart, setCart] = (0, _react.useState)([]);
+    const [searchWord, setSearchWord] = (0, _react.useState)("");
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.BrowserRouter), {
         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
             children: [
@@ -27176,7 +27177,7 @@ function App() {
                     cartItemCount: cart.length
                 }, void 0, false, {
                     fileName: "src/components/App.jsx",
-                    lineNumber: 13,
+                    lineNumber: 14,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Routes), {
@@ -27185,11 +27186,12 @@ function App() {
                             path: "/",
                             element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _productPageDefault.default), {
                                 cart: cart,
-                                setCart: setCart
+                                setCart: setCart,
+                                searchWord: searchWord
                             }, void 0, false, void 0, void 0)
                         }, void 0, false, {
                             fileName: "src/components/App.jsx",
-                            lineNumber: 15,
+                            lineNumber: 16,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27200,28 +27202,28 @@ function App() {
                             }, void 0, false, void 0, void 0)
                         }, void 0, false, {
                             fileName: "src/components/App.jsx",
-                            lineNumber: 16,
+                            lineNumber: 20,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/App.jsx",
-                    lineNumber: 14,
+                    lineNumber: 15,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "src/components/App.jsx",
-            lineNumber: 12,
+            lineNumber: 13,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "src/components/App.jsx",
-        lineNumber: 11,
+        lineNumber: 12,
         columnNumber: 5
     }, this);
 }
-_s(App, "ZqFaEIYkzI5UoYUmTgmqHbYYm/0=");
+_s(App, "UqfCOPIXlrQ2AE/w+3RDF5zjRvo=");
 _c = App;
 exports.default = App;
 var _c;
@@ -27232,7 +27234,7 @@ $RefreshReg$(_c, "App");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"9xmpe","./Navbar":"4U1ks","./CartPage":"3BX9L","./productPage":"2qk7i","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"9xmpe":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"9xmpe","./Navbar":"4U1ks","./CartPage":"3BX9L","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./ProductPage":"bSLFh"}],"9xmpe":[function(require,module,exports) {
 /**
  * React Router DOM v6.16.0
  *
@@ -33534,11 +33536,11 @@ $RefreshReg$(_c, "CartPage");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"2qk7i":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$3500 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"bSLFh":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$e40a = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$3500.prelude(module);
+$parcel$ReactRefreshHelpers$e40a.prelude(module);
 
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -33546,15 +33548,21 @@ parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
-var _reactRouterDom = require("react-router-dom");
+var _searchForm = require("./SearchForm");
+var _searchFormDefault = parcelHelpers.interopDefault(_searchForm);
+var _latestSearches = require("./LatestSearches");
+var _latestSearchesDefault = parcelHelpers.interopDefault(_latestSearches);
 var _s = $RefreshSig$();
 function ProductPage({ cart, setCart }) {
     _s();
     const [products, setProducts] = (0, _react.useState)([]);
     const [status, setStatus] = (0, _react.useState)("loading");
+    const [searchTerm, setSearchTerm] = (0, _react.useState)("");
+    const [filteredProducts, setFilteredProducts] = (0, _react.useState)([]);
+    const [latestSearches, setLatestSearches] = (0, _react.useState)([]);
     async function fetchProducts() {
         try {
-            const response = await fetch("http://localhost:3000/product"); // Anpassa URL:en för din API
+            const response = await fetch("http://localhost:3000/product");
             if (response.ok) {
                 const data = await response.json();
                 setProducts(data);
@@ -33568,53 +33576,85 @@ function ProductPage({ cart, setCart }) {
     (0, _react.useEffect)(()=>{
         fetchProducts();
     }, []);
+    (0, _react.useEffect)(()=>{
+        const filtered = products.filter((product)=>product.name.toLowerCase().includes(searchTerm.toLowerCase()));
+        setFilteredProducts(filtered);
+    }, [
+        searchTerm,
+        products
+    ]);
     const addToCart = (product)=>{
         if (product.stock > 0) setCart([
             ...cart,
             product
         ]);
     };
+    const handleSearchTerm = (term)=>{
+        if (term && !latestSearches.includes(term)) {
+            const updatedSearches = [
+                term,
+                ...latestSearches.slice(0, 4)
+            ]; // Visar de senaste 5 sökningarna
+            setLatestSearches(updatedSearches);
+        }
+        setSearchTerm(term);
+    };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
                 children: "Produktsida"
             }, void 0, false, {
-                fileName: "src/components/productPage.jsx",
-                lineNumber: 36,
+                fileName: "src/components/ProductPage.jsx",
+                lineNumber: 55,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _searchFormDefault.default), {
+                setSearchTerm: handleSearchTerm
+            }, void 0, false, {
+                fileName: "src/components/ProductPage.jsx",
+                lineNumber: 56,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _latestSearchesDefault.default), {
+                latestSearches: latestSearches,
+                setSearchTerm: handleSearchTerm
+            }, void 0, false, {
+                fileName: "src/components/ProductPage.jsx",
+                lineNumber: 57,
                 columnNumber: 7
             }, this),
             status === "loading" && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                 children: "Laddar produkter..."
             }, void 0, false, {
-                fileName: "src/components/productPage.jsx",
-                lineNumber: 37,
+                fileName: "src/components/ProductPage.jsx",
+                lineNumber: 58,
                 columnNumber: 32
             }, this),
             status === "error" && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                 children: "Ett fel uppstod vid h\xe4mtningen av produkter."
             }, void 0, false, {
-                fileName: "src/components/productPage.jsx",
-                lineNumber: 38,
+                fileName: "src/components/ProductPage.jsx",
+                lineNumber: 59,
                 columnNumber: 30
             }, this),
             status === "ok" && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 className: "product-card-container",
-                children: products.map((product)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: filteredProducts.map((product)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                         className: "product-card",
                         children: [
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
                                 children: product.name
                             }, void 0, false, {
-                                fileName: "src/components/productPage.jsx",
-                                lineNumber: 44,
+                                fileName: "src/components/ProductPage.jsx",
+                                lineNumber: 64,
                                 columnNumber: 15
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
                                 src: product.image,
                                 alt: product.name
                             }, void 0, false, {
-                                fileName: "src/components/productPage.jsx",
-                                lineNumber: 45,
+                                fileName: "src/components/ProductPage.jsx",
+                                lineNumber: 65,
                                 columnNumber: 15
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -33624,8 +33664,8 @@ function ProductPage({ cart, setCart }) {
                                     " kr"
                                 ]
                             }, void 0, true, {
-                                fileName: "src/components/productPage.jsx",
-                                lineNumber: 46,
+                                fileName: "src/components/ProductPage.jsx",
+                                lineNumber: 66,
                                 columnNumber: 15
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -33634,53 +33674,164 @@ function ProductPage({ cart, setCart }) {
                                     product.stock
                                 ]
                             }, void 0, true, {
-                                fileName: "src/components/productPage.jsx",
-                                lineNumber: 47,
+                                fileName: "src/components/ProductPage.jsx",
+                                lineNumber: 67,
                                 columnNumber: 15
                             }, this),
                             product.stock > 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
                                 onClick: ()=>addToCart(product),
                                 children: "L\xe4gg till i kundvagnen"
                             }, void 0, false, {
-                                fileName: "src/components/productPage.jsx",
-                                lineNumber: 49,
+                                fileName: "src/components/ProductPage.jsx",
+                                lineNumber: 69,
                                 columnNumber: 17
                             }, this) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                 children: "Slut i lager"
                             }, void 0, false, {
-                                fileName: "src/components/productPage.jsx",
-                                lineNumber: 51,
+                                fileName: "src/components/ProductPage.jsx",
+                                lineNumber: 71,
                                 columnNumber: 17
                             }, this)
                         ]
                     }, product.id, true, {
-                        fileName: "src/components/productPage.jsx",
-                        lineNumber: 43,
+                        fileName: "src/components/ProductPage.jsx",
+                        lineNumber: 63,
                         columnNumber: 13
                     }, this))
             }, void 0, false, {
-                fileName: "src/components/productPage.jsx",
-                lineNumber: 41,
+                fileName: "src/components/ProductPage.jsx",
+                lineNumber: 61,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
-        fileName: "src/components/productPage.jsx",
-        lineNumber: 35,
+        fileName: "src/components/ProductPage.jsx",
+        lineNumber: 54,
         columnNumber: 5
     }, this);
 }
-_s(ProductPage, "A0FkESMYLacrYDQQvQK91FqX4m0=");
+_s(ProductPage, "oEqdoLBb8f/Acv+Su6WtuU3rGDU=");
 _c = ProductPage;
 exports.default = ProductPage;
 var _c;
 $RefreshReg$(_c, "ProductPage");
 
-  $parcel$ReactRefreshHelpers$3500.postlude(module);
+  $parcel$ReactRefreshHelpers$e40a.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"9xmpe","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}]},["gFoaR","1xC6H","edxR2"], "edxR2", "parcelRequirec0b8")
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./SearchForm":"3u54k","./LatestSearches":"fGAO4"}],"3u54k":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$a990 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$a990.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>SearchForm);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _s = $RefreshSig$();
+function SearchForm({ setSearchTerm }) {
+    _s();
+    const [searchInput, setSearchInput] = (0, _react.useState)("");
+    const handleInputChange = (e)=>{
+        setSearchInput(e.target.value);
+    };
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+        setSearchTerm(searchInput);
+    };
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
+        className: "search-form",
+        onSubmit: handleSubmit,
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                type: "text",
+                placeholder: "S\xf6k produkter",
+                value: searchInput,
+                onChange: handleInputChange
+            }, void 0, false, {
+                fileName: "src/components/SearchForm.jsx",
+                lineNumber: 17,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                type: "submit",
+                children: "S\xf6k"
+            }, void 0, false, {
+                fileName: "src/components/SearchForm.jsx",
+                lineNumber: 23,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/SearchForm.jsx",
+        lineNumber: 16,
+        columnNumber: 5
+    }, this);
+}
+_s(SearchForm, "7jaUvtQT89vZZF+Gjg+8PUuVm+0=");
+_c = SearchForm;
+var _c;
+$RefreshReg$(_c, "SearchForm");
+
+  $parcel$ReactRefreshHelpers$a990.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"fGAO4":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$83a9 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$83a9.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>LatestSearches);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+function LatestSearches({ latestSearches, setSearchTerm }) {
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "latest-searches",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                children: "Senaste s\xf6kningar:"
+            }, void 0, false, {
+                fileName: "src/components/LatestSearches.jsx",
+                lineNumber: 6,
+                columnNumber: 7
+            }, this),
+            latestSearches.map((search, index)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                    onClick: ()=>setSearchTerm(search),
+                    children: search
+                }, index, false, {
+                    fileName: "src/components/LatestSearches.jsx",
+                    lineNumber: 8,
+                    columnNumber: 9
+                }, this))
+        ]
+    }, void 0, true, {
+        fileName: "src/components/LatestSearches.jsx",
+        lineNumber: 5,
+        columnNumber: 5
+    }, this);
+}
+_c = LatestSearches;
+var _c;
+$RefreshReg$(_c, "LatestSearches");
+
+  $parcel$ReactRefreshHelpers$83a9.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}]},["gFoaR","1xC6H","edxR2"], "edxR2", "parcelRequirec0b8")
 
 //# sourceMappingURL=index.fb506c2f.js.map

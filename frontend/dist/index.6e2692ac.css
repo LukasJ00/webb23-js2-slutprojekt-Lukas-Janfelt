@@ -92,4 +92,17 @@ h1 {
   margin: 10px;
 }
 
+.search-form {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.latest-searches {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
 /*# sourceMappingURL=index.6e2692ac.css.map */
