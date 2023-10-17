@@ -33342,9 +33342,30 @@ function CartPage({ cart, setCart }) {
     const total = cart.reduce((acc, product)=>acc + product.price, 0);
     const checkout = async ()=>{
         try {
-            // Hämta en array med alla produkt-ID:n från kundvagnen
-            const productIds = cart.map((product)=>product.id);
-            // Gör en POST-förfrågan till servern för att uppdatera lagersaldot för alla produkter
+            // Skapa en kopia av kundvagnen
+            const updatedCart = [
+                ...cart
+            ];
+            // Kontrollera lagersaldot för varje produkt som läggs till i kundvagnen
+            for (const product of updatedCart){
+                if (product.stock <= 0) {
+                    alert(`Produkten "${product.name}" \xe4r slut i lager.`);
+                    return; // Avbryt köpet om en produkt är slut
+                }
+                // Om det inte finns tillräckligt med lager, justera antalet i kundvagnen
+                if (updatedCart.filter((p)=>p.id === product.id).length > product.stock) {
+                    alert(`Det finns inte tillr\xe4ckligt med "${product.name}" i lager.`);
+                    return; // Avbryt köpet om det inte finns tillräckligt med lager
+                }
+            }
+            // Uppdatera lagersaldot och kundvagnen
+            for (const product of updatedCart){
+                const index = updatedCart.findIndex((p)=>p.id === product.id);
+                updatedCart[index].stock -= 1;
+            }
+            setCart(updatedCart);
+            // Gör en POST-förfrågan till servern för att genomföra köpet
+            const productIds = updatedCart.map((product)=>product.id);
             const response = await fetch("http://localhost:3000/checkout", {
                 method: "POST",
                 headers: {
@@ -33354,11 +33375,8 @@ function CartPage({ cart, setCart }) {
                     productIds
                 })
             });
-            if (response.ok) {
-                // Om uppdateringen lyckades, rensa kundvagnen
-                setCart([]);
-                alert("K\xf6pet har genomf\xf6rts!");
-            } else alert("Ett fel uppstod vid genomf\xf6randet av k\xf6pet.");
+            if (response.ok) alert("K\xf6pet har genomf\xf6rts!");
+            else alert("Ett fel uppstod vid genomf\xf6randet av k\xf6pet.");
         } catch (error) {
             console.error(error);
             alert("Ett fel uppstod.");
@@ -33374,14 +33392,14 @@ function CartPage({ cart, setCart }) {
                 children: "Kundvagn"
             }, void 0, false, {
                 fileName: "src/components/CartPage.jsx",
-                lineNumber: 39,
+                lineNumber: 58,
                 columnNumber: 7
             }, this),
             cart.length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                 children: "Kundvagnen \xe4r tom."
             }, void 0, false, {
                 fileName: "src/components/CartPage.jsx",
-                lineNumber: 41,
+                lineNumber: 60,
                 columnNumber: 9
             }, this) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 children: [
@@ -33391,7 +33409,7 @@ function CartPage({ cart, setCart }) {
                                     children: product.name
                                 }, void 0, false, {
                                     fileName: "src/components/CartPage.jsx",
-                                    lineNumber: 46,
+                                    lineNumber: 65,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -33402,13 +33420,13 @@ function CartPage({ cart, setCart }) {
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/CartPage.jsx",
-                                    lineNumber: 47,
+                                    lineNumber: 66,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, product.id, true, {
                             fileName: "src/components/CartPage.jsx",
-                            lineNumber: 45,
+                            lineNumber: 64,
                             columnNumber: 13
                         }, this)),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -33419,7 +33437,7 @@ function CartPage({ cart, setCart }) {
                         ]
                     }, void 0, true, {
                         fileName: "src/components/CartPage.jsx",
-                        lineNumber: 50,
+                        lineNumber: 69,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -33427,7 +33445,7 @@ function CartPage({ cart, setCart }) {
                         children: "Genomf\xf6r k\xf6p"
                     }, void 0, false, {
                         fileName: "src/components/CartPage.jsx",
-                        lineNumber: 51,
+                        lineNumber: 70,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -33435,19 +33453,19 @@ function CartPage({ cart, setCart }) {
                         children: "T\xf6m kundvagnen"
                     }, void 0, false, {
                         fileName: "src/components/CartPage.jsx",
-                        lineNumber: 52,
+                        lineNumber: 71,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/CartPage.jsx",
-                lineNumber: 43,
+                lineNumber: 62,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/components/CartPage.jsx",
-        lineNumber: 38,
+        lineNumber: 57,
         columnNumber: 5
     }, this);
 }
