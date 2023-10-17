@@ -11,7 +11,7 @@
     "name": "Elgitarr",
     "image": "https://images.pexels.com/photos/7334396/pexels-photo-7334396.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "price": 4999,
-    "stock": 5
+    "stock": 19
   },
   {
     "id": 3,
@@ -32,13 +32,13 @@
     "name": "Trumset",
     "image": "https://images.pexels.com/photos/13185330/pexels-photo-13185330.jpeg",
     "price": 7500,
-    "stock": 8
+    "stock": 7
   },
   {
     "id": 6,
     "name": "Akustiskt Gitarr",
     "image": "https://images.pexels.com/photos/3660866/pexels-photo-3660866.jpeg?auto=compress&cs=tinysrgb&w=1600",
     "price": 2500,
-    "stock": 8
+    "stock": 7
   }
 ]
