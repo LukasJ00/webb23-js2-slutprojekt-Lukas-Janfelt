@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 function CartPage({ cart, setCart}) {
   const [purchaseCompleted, setPurchaseCompleted] = useState(false);
   const [message, setMessage] = useState(""); // Lägg till en state för meddelanden
+  const navigate = useNavigate(); 
 
   const showMessage = (msg) => {
     setMessage(msg);
@@ -66,6 +68,7 @@ function CartPage({ cart, setCart}) {
 
   const clearCart = () => {
     setCart([]);
+    navigate("/");
   };
 
   const cartItems = cart.reduce((acc, product) => {

@@ -33670,11 +33670,13 @@ parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactRouterDom = require("react-router-dom");
 var _s = $RefreshSig$();
 function CartPage({ cart, setCart }) {
     _s();
     const [purchaseCompleted, setPurchaseCompleted] = (0, _react.useState)(false);
     const [message, setMessage] = (0, _react.useState)(""); // Lägg till en state för meddelanden
+    const navigate = (0, _reactRouterDom.useNavigate)();
     const showMessage = (msg)=>{
         setMessage(msg);
         setTimeout(()=>{
@@ -33730,6 +33732,7 @@ function CartPage({ cart, setCart }) {
     };
     const clearCart = ()=>{
         setCart([]);
+        navigate("/");
     };
     const cartItems = cart.reduce((acc, product)=>{
         // Skapa en kopia av kundvagnsobjektet med ett attribut 'quantity'
@@ -33751,20 +33754,20 @@ function CartPage({ cart, setCart }) {
                 children: "Kundvagn"
             }, void 0, false, {
                 fileName: "src/components/CartPage.jsx",
-                lineNumber: 91,
+                lineNumber: 94,
                 columnNumber: 7
             }, this),
             purchaseCompleted ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                 children: "Tack f\xf6r ditt k\xf6p!"
             }, void 0, false, {
                 fileName: "src/components/CartPage.jsx",
-                lineNumber: 93,
+                lineNumber: 96,
                 columnNumber: 9
             }, this) : cart.length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                 children: "Kundvagnen \xe4r tom."
             }, void 0, false, {
                 fileName: "src/components/CartPage.jsx",
-                lineNumber: 96,
+                lineNumber: 99,
                 columnNumber: 11
             }, this) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 children: [
@@ -33779,7 +33782,7 @@ function CartPage({ cart, setCart }) {
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/CartPage.jsx",
-                                    lineNumber: 101,
+                                    lineNumber: 104,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -33790,13 +33793,13 @@ function CartPage({ cart, setCart }) {
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/CartPage.jsx",
-                                    lineNumber: 104,
+                                    lineNumber: 107,
                                     columnNumber: 17
                                 }, this)
                             ]
                         }, item.id, true, {
                             fileName: "src/components/CartPage.jsx",
-                            lineNumber: 100,
+                            lineNumber: 103,
                             columnNumber: 15
                         }, this)),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -33807,7 +33810,7 @@ function CartPage({ cart, setCart }) {
                         ]
                     }, void 0, true, {
                         fileName: "src/components/CartPage.jsx",
-                        lineNumber: 107,
+                        lineNumber: 110,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -33817,7 +33820,7 @@ function CartPage({ cart, setCart }) {
                                 children: "Genomf\xf6r k\xf6p"
                             }, void 0, false, {
                                 fileName: "src/components/CartPage.jsx",
-                                lineNumber: 109,
+                                lineNumber: 112,
                                 columnNumber: 15
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -33825,37 +33828,41 @@ function CartPage({ cart, setCart }) {
                                 children: "T\xf6m kundvagnen"
                             }, void 0, false, {
                                 fileName: "src/components/CartPage.jsx",
-                                lineNumber: 110,
+                                lineNumber: 113,
                                 columnNumber: 15
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/CartPage.jsx",
-                        lineNumber: 108,
+                        lineNumber: 111,
                         columnNumber: 13
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/CartPage.jsx",
-                lineNumber: 98,
+                lineNumber: 101,
                 columnNumber: 11
             }, this),
             message && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                 children: message
             }, void 0, false, {
                 fileName: "src/components/CartPage.jsx",
-                lineNumber: 115,
+                lineNumber: 118,
                 columnNumber: 19
             }, this),
             " "
         ]
     }, void 0, true, {
         fileName: "src/components/CartPage.jsx",
-        lineNumber: 90,
+        lineNumber: 93,
         columnNumber: 5
     }, this);
 }
-_s(CartPage, "0j6loKmHdVFoKi0+/dGiBW0AQs8=");
+_s(CartPage, "CMf6pFqTgP2auvNTM8FhgPLvCXw=", false, function() {
+    return [
+        (0, _reactRouterDom.useNavigate)
+    ];
+});
 _c = CartPage;
 exports.default = CartPage;
 var _c;
@@ -33866,7 +33873,7 @@ $RefreshReg$(_c, "CartPage");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"bSLFh":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-router-dom":"9xmpe"}],"bSLFh":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$e40a = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
