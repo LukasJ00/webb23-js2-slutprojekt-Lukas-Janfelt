@@ -33338,10 +33338,23 @@ parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
+var _s = $RefreshSig$();
 function CartPage({ cart, setCart }) {
-    const total = cart.reduce((acc, product)=>acc + product.price, 0);
+    _s();
+    const [purchaseCompleted, setPurchaseCompleted] = (0, _react.useState)(false);
+    const [message, setMessage] = (0, _react.useState)(""); // Lägg till en state för meddelanden
+    const showMessage = (msg)=>{
+        setMessage(msg);
+        setTimeout(()=>{
+            setMessage("");
+        }, 3000); // Dölj meddelandet efter 3 sekunder
+    };
     const checkout = async ()=>{
         try {
+            if (cart.length === 0) {
+                showMessage("Kundvagnen \xe4r tom.");
+                return;
+            }
             // Skapa en kopia av kundvagnen
             const updatedCart = [
                 ...cart
@@ -33349,21 +33362,22 @@ function CartPage({ cart, setCart }) {
             // Kontrollera lagersaldot för varje produkt som läggs till i kundvagnen
             for (const product of updatedCart){
                 if (product.stock <= 0) {
-                    alert(`Produkten "${product.name}" \xe4r slut i lager.`);
+                    showMessage(`Produkten "${product.name}" \xe4r slut i lager.`);
                     return; // Avbryt köpet om en produkt är slut
                 }
                 // Om det inte finns tillräckligt med lager, justera antalet i kundvagnen
                 if (updatedCart.filter((p)=>p.id === product.id).length > product.stock) {
-                    alert(`Det finns inte tillr\xe4ckligt med "${product.name}" i lager.`);
+                    showMessage(`Det finns inte tillr\xe4ckligt med "${product.name}" i lager.`);
                     return; // Avbryt köpet om det inte finns tillräckligt med lager
                 }
             }
-            // Uppdatera lagersaldot och kundvagnen
+            // Uppdatera lagersaldot
             for (const product of updatedCart){
                 const index = updatedCart.findIndex((p)=>p.id === product.id);
                 updatedCart[index].stock -= 1;
             }
-            setCart(updatedCart);
+            // Töm kundvagnen
+            setCart([]);
             // Gör en POST-förfrågan till servern för att genomföra köpet
             const productIds = updatedCart.map((product)=>product.id);
             const response = await fetch("http://localhost:3000/checkout", {
@@ -33375,16 +33389,29 @@ function CartPage({ cart, setCart }) {
                     productIds
                 })
             });
-            if (response.ok) alert("K\xf6pet har genomf\xf6rts!");
-            else alert("Ett fel uppstod vid genomf\xf6randet av k\xf6pet.");
+            if (response.ok) setPurchaseCompleted(true);
+            else showMessage("Ett fel uppstod vid genomf\xf6randet av k\xf6pet.");
         } catch (error) {
             console.error(error);
-            alert("Ett fel uppstod.");
+            showMessage("Ett fel uppstod.");
         }
     };
     const clearCart = ()=>{
         setCart([]);
     };
+    const cartItems = cart.reduce((acc, product)=>{
+        // Skapa en kopia av kundvagnsobjektet med ett attribut 'quantity'
+        const cartItem = {
+            ...product,
+            quantity: 1
+        };
+        // Kontrollera om produkten redan finns i 'acc'
+        const existingProduct = acc.find((p)=>p.id === cartItem.id);
+        if (existingProduct) existingProduct.quantity += 1;
+        else acc.push(cartItem);
+        return acc;
+    }, []);
+    const totalPrice = cartItems.reduce((acc, item)=>acc + item.price * item.quantity, 0);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "checkout",
         children: [
@@ -33392,83 +33419,111 @@ function CartPage({ cart, setCart }) {
                 children: "Kundvagn"
             }, void 0, false, {
                 fileName: "src/components/CartPage.jsx",
-                lineNumber: 58,
+                lineNumber: 91,
                 columnNumber: 7
             }, this),
-            cart.length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+            purchaseCompleted ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                children: "Tack f\xf6r ditt k\xf6p!"
+            }, void 0, false, {
+                fileName: "src/components/CartPage.jsx",
+                lineNumber: 93,
+                columnNumber: 9
+            }, this) : cart.length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                 children: "Kundvagnen \xe4r tom."
             }, void 0, false, {
                 fileName: "src/components/CartPage.jsx",
-                lineNumber: 60,
-                columnNumber: 9
+                lineNumber: 96,
+                columnNumber: 11
             }, this) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 children: [
-                    cart.map((product)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                    cartItems.map((item)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                             children: [
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
-                                    children: product.name
-                                }, void 0, false, {
+                                    children: [
+                                        item.name,
+                                        " ",
+                                        item.quantity,
+                                        " st"
+                                    ]
+                                }, void 0, true, {
                                     fileName: "src/components/CartPage.jsx",
-                                    lineNumber: 65,
-                                    columnNumber: 15
+                                    lineNumber: 101,
+                                    columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                     children: [
                                         "Pris: ",
-                                        product.price,
+                                        item.price * item.quantity,
                                         " kr"
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/CartPage.jsx",
-                                    lineNumber: 66,
-                                    columnNumber: 15
+                                    lineNumber: 104,
+                                    columnNumber: 17
                                 }, this)
                             ]
-                        }, product.id, true, {
+                        }, item.id, true, {
                             fileName: "src/components/CartPage.jsx",
-                            lineNumber: 64,
-                            columnNumber: 13
+                            lineNumber: 100,
+                            columnNumber: 15
                         }, this)),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                         children: [
                             "Totalpris: ",
-                            total,
+                            totalPrice,
                             " kr"
                         ]
                     }, void 0, true, {
                         fileName: "src/components/CartPage.jsx",
-                        lineNumber: 69,
-                        columnNumber: 11
+                        lineNumber: 107,
+                        columnNumber: 13
                     }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                        onClick: checkout,
-                        children: "Genomf\xf6r k\xf6p"
-                    }, void 0, false, {
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                                onClick: checkout,
+                                children: "Genomf\xf6r k\xf6p"
+                            }, void 0, false, {
+                                fileName: "src/components/CartPage.jsx",
+                                lineNumber: 109,
+                                columnNumber: 15
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                                onClick: clearCart,
+                                children: "T\xf6m kundvagnen"
+                            }, void 0, false, {
+                                fileName: "src/components/CartPage.jsx",
+                                lineNumber: 110,
+                                columnNumber: 15
+                            }, this)
+                        ]
+                    }, void 0, true, {
                         fileName: "src/components/CartPage.jsx",
-                        lineNumber: 70,
-                        columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                        onClick: clearCart,
-                        children: "T\xf6m kundvagnen"
-                    }, void 0, false, {
-                        fileName: "src/components/CartPage.jsx",
-                        lineNumber: 71,
-                        columnNumber: 11
+                        lineNumber: 108,
+                        columnNumber: 13
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/CartPage.jsx",
-                lineNumber: 62,
-                columnNumber: 9
-            }, this)
+                lineNumber: 98,
+                columnNumber: 11
+            }, this),
+            message && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                children: message
+            }, void 0, false, {
+                fileName: "src/components/CartPage.jsx",
+                lineNumber: 115,
+                columnNumber: 19
+            }, this),
+            " "
         ]
     }, void 0, true, {
         fileName: "src/components/CartPage.jsx",
-        lineNumber: 57,
+        lineNumber: 90,
         columnNumber: 5
     }, this);
 }
+_s(CartPage, "0j6loKmHdVFoKi0+/dGiBW0AQs8=");
 _c = CartPage;
 exports.default = CartPage;
 var _c;

@@ -1,33 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 
 function CartPage({ cart, setCart }) {
-  const total = cart.reduce((acc, product) => acc + product.price, 0);
+  const [purchaseCompleted, setPurchaseCompleted] = useState(false);
+  const [message, setMessage] = useState(""); // Lägg till en state för meddelanden
 
+  const showMessage = (msg) => {
+    setMessage(msg);
+    setTimeout(() => {
+      setMessage("");
+    }, 3000); // Dölj meddelandet efter 3 sekunder
+  };
+  
   const checkout = async () => {
     try {
+      if (cart.length === 0) {
+        showMessage("Kundvagnen är tom.");
+        return;
+      }
+
       // Skapa en kopia av kundvagnen
       const updatedCart = [...cart];
-  
+
       // Kontrollera lagersaldot för varje produkt som läggs till i kundvagnen
       for (const product of updatedCart) {
         if (product.stock <= 0) {
-          alert(`Produkten "${product.name}" är slut i lager.`);
+          showMessage(`Produkten "${product.name}" är slut i lager.`);
           return; // Avbryt köpet om en produkt är slut
         }
         // Om det inte finns tillräckligt med lager, justera antalet i kundvagnen
         if (updatedCart.filter((p) => p.id === product.id).length > product.stock) {
-          alert(`Det finns inte tillräckligt med "${product.name}" i lager.`);
+          showMessage(`Det finns inte tillräckligt med "${product.name}" i lager.`);
           return; // Avbryt köpet om det inte finns tillräckligt med lager
         }
       }
-  
-      // Uppdatera lagersaldot och kundvagnen
+
+      // Uppdatera lagersaldot
       for (const product of updatedCart) {
         const index = updatedCart.findIndex((p) => p.id === product.id);
         updatedCart[index].stock -= 1;
       }
-      setCart(updatedCart);
-  
+
+      // Töm kundvagnen
+      setCart([]);
+
       // Gör en POST-förfrågan till servern för att genomföra köpet
       const productIds = updatedCart.map((product) => product.id);
       const response = await fetch("http://localhost:3000/checkout", {
@@ -37,15 +52,15 @@ function CartPage({ cart, setCart }) {
         },
         body: JSON.stringify({ productIds }),
       });
-  
+
       if (response.ok) {
-        alert("Köpet har genomförts!");
+        setPurchaseCompleted(true);
       } else {
-        alert("Ett fel uppstod vid genomförandet av köpet.");
+        showMessage("Ett fel uppstod vid genomförandet av köpet.");
       }
     } catch (error) {
       console.error(error);
-      alert("Ett fel uppstod.");
+      showMessage("Ett fel uppstod.");
     }
   };
 
@@ -53,24 +68,51 @@ function CartPage({ cart, setCart }) {
     setCart([]);
   };
 
+  const cartItems = cart.reduce((acc, product) => {
+    // Skapa en kopia av kundvagnsobjektet med ett attribut 'quantity'
+    const cartItem = { ...product, quantity: 1 };
+
+    // Kontrollera om produkten redan finns i 'acc'
+    const existingProduct = acc.find((p) => p.id === cartItem.id);
+
+    if (existingProduct) {
+      existingProduct.quantity += 1;
+    } else {
+      acc.push(cartItem);
+    }
+
+    return acc;
+  }, []);
+
+  const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
   return (
     <div className="checkout">
       <h1>Kundvagn</h1>
-      {cart.length === 0 ? (
-        <p>Kundvagnen är tom.</p>
+      {purchaseCompleted ? (
+        <p>Tack för ditt köp!</p>
       ) : (
-        <div>
-          {cart.map((product) => (
-            <div key={product.id}>
-              <h2>{product.name}</h2>
-              <p>Pris: {product.price} kr</p>
+        cart.length === 0 ? (
+          <p>Kundvagnen är tom.</p>
+        ) : (
+          <div>
+            {cartItems.map((item) => (
+              <div key={item.id}>
+                <h2>
+                  {item.name} {item.quantity} st
+                </h2>
+                <p>Pris: {item.price * item.quantity} kr</p>
+              </div>
+            ))}
+            <p>Totalpris: {totalPrice} kr</p>
+            <div>
+              <button onClick={checkout}>Genomför köp</button>
+              <button onClick={clearCart}>Töm kundvagnen</button>
             </div>
-          ))}
-          <p>Totalpris: {total} kr</p>
-          <button onClick={checkout}>Genomför köp</button>
-          <button onClick={clearCart}>Töm kundvagnen</button>
-        </div>
+          </div>
+        )
       )}
+      {message && <p>{message}</p>} {/* Visa meddelandet om det finns */}
     </div>
   );
 }
