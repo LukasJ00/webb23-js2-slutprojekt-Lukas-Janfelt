@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-
 function CartPage({ cart, setCart}) {
   const [purchaseCompleted, setPurchaseCompleted] = useState(false);
   const [message, setMessage] = useState(""); // Lägg till en state för meddelanden
@@ -12,31 +11,6 @@ function CartPage({ cart, setCart}) {
     }, 3000); // Dölj meddelandet efter 3 sekunder
   };
   
-  const increaseQuantity = (product) => {
-    const updatedCart = [...cart];
-    const index = updatedCart.findIndex((p) => p.id === product.id);
-
-    if (index !== -1 && updatedCart[index].stock > 0) {
-      updatedCart[index].quantity += 1;
-      updatedCart[index].stock -= 1;
-      setCart(updatedCart);
-    } else {
-      showMessage(`Det går inte att öka antalet ${product.name} i kundvagnen.`);
-    }
-  };
-
-  const decreaseQuantity = (product) => {
-    const updatedCart = [...cart];
-    const index = updatedCart.findIndex((p) => p.id === product.id);
-
-    if (index !== -1 && updatedCart[index].quantity > 1) {
-      updatedCart[index].quantity -= 1;
-      updatedCart[index].stock += 1;
-      setCart(updatedCart);
-    } else {
-      showMessage(`Det går inte att minska antalet ${product.name} i kundvagnen.`);
-    }
-  };
   const checkout = async () => {
     try {
       if (cart.length === 0) {
@@ -138,7 +112,7 @@ function CartPage({ cart, setCart}) {
           </div>
         )
       )}
-      {message && <p>{message}</p>} {/* Visa meddelandet om det finns */}
+      {message && <p>{message}</p>} {}
     </div>
   );
 }

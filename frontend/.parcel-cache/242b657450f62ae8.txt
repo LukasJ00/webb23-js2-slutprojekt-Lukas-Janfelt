@@ -1,0 +1,16 @@
+15
+83C:\Users\Lukas\OneDrive\Skrivbord\webb23-js2-slutprojekt-lukas-janfelt\frontend\src133419430579855265 1
+84C:\Users\Lukas\OneDrive\Skrivbord\webb23-js2-slutprojekt-lukas-janfelt\frontend\dist133420400436946031 1
+92C:\Users\Lukas\OneDrive\Skrivbord\webb23-js2-slutprojekt-lukas-janfelt\frontend\src\main.jsx133419445047670556 0
+113C:\Users\Lukas\OneDrive\Skrivbord\webb23-js2-slutprojekt-lukas-janfelt\frontend\src\components\LatestSearches.jsx133420318047044627 0
+92C:\Users\Lukas\OneDrive\Skrivbord\webb23-js2-slutprojekt-lukas-janfelt\frontend\package.json133419426203693760 0
+94C:\Users\Lukas\OneDrive\Skrivbord\webb23-js2-slutprojekt-lukas-janfelt\frontend\src\components133420393378961406 1
+87C:\Users\Lukas\OneDrive\Skrivbord\webb23-js2-slutprojekt-lukas-janfelt\frontend\src\css133419430579925064 1
+94C:\Users\Lukas\OneDrive\Skrivbord\webb23-js2-slutprojekt-lukas-janfelt\frontend\src\index.html133419476035777529 0
+95C:\Users\Lukas\OneDrive\Skrivbord\webb23-js2-slutprojekt-lukas-janfelt\frontend\src\css\App.css133420326070966564 0
+102C:\Users\Lukas\OneDrive\Skrivbord\webb23-js2-slutprojekt-lukas-janfelt\frontend\src\components\App.jsx133420394873467606 0
+107C:\Users\Lukas\OneDrive\Skrivbord\webb23-js2-slutprojekt-lukas-janfelt\frontend\src\components\CartPage.jsx133420398668067079 0
+105C:\Users\Lukas\OneDrive\Skrivbord\webb23-js2-slutprojekt-lukas-janfelt\frontend\src\components\Navbar.jsx133419499068252335 0
+110C:\Users\Lukas\OneDrive\Skrivbord\webb23-js2-slutprojekt-lukas-janfelt\frontend\src\components\ProductPage.jsx133420318639637081 0
+109C:\Users\Lukas\OneDrive\Skrivbord\webb23-js2-slutprojekt-lukas-janfelt\frontend\src\components\SearchForm.jsx133420317692795165 0
+95C:\Users\Lukas\OneDrive\Skrivbord\webb23-js2-slutprojekt-lukas-janfelt\frontend\dist\index.html133420375924406358 0
