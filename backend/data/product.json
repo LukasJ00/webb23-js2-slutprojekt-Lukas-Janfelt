@@ -4,14 +4,14 @@
     "name": "Piano",
     "image": "https://images.pexels.com/photos/1021142/pexels-photo-1021142.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "price": 20000,
-    "stock": 5
+    "stock": 20
   },
   {
     "id": 2,
     "name": "Elgitarr",
     "image": "https://images.pexels.com/photos/7334396/pexels-photo-7334396.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "price": 4999,
-    "stock": 6
+    "stock": 4
   },
   {
     "id": 3,
