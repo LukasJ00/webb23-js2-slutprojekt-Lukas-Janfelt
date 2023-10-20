@@ -3,14 +3,14 @@ import { useNavigate } from 'react-router-dom';
 
 function CartPage({ cart, setCart}) {
   const [purchaseCompleted, setPurchaseCompleted] = useState(false);
-  const [message, setMessage] = useState(""); // Lägg till en state för meddelanden
+  const [message, setMessage] = useState(""); 
   const navigate = useNavigate(); 
 
   const showMessage = (msg) => {
     setMessage(msg);
     setTimeout(() => {
       setMessage("");
-    }, 3000); // Dölj meddelandet efter 3 sekunder
+    }, 3000); 
   };
   
   const checkout = async () => {
@@ -20,32 +20,26 @@ function CartPage({ cart, setCart}) {
         return;
       }
 
-      // Skapa en kopia av kundvagnen
       const updatedCart = [...cart];
 
-      // Kontrollera lagersaldot för varje produkt som läggs till i kundvagnen
       for (const product of updatedCart) {
         if (product.stock <= 0) {
           showMessage(`Produkten "${product.name}" är slut i lager.`);
-          return; // Avbryt köpet om en produkt är slut
+          return;
         }
-        // Om det inte finns tillräckligt med lager, justera antalet i kundvagnen
         if (updatedCart.filter((p) => p.id === product.id).length > product.stock) {
           showMessage(`Det finns inte tillräckligt med "${product.name}" i lager.`);
-          return; // Avbryt köpet om det inte finns tillräckligt med lager
+          return; 
         }
       }
 
-      // Uppdatera lagersaldot
       for (const product of updatedCart) {
         const index = updatedCart.findIndex((p) => p.id === product.id);
         updatedCart[index].stock -= 1;
       }
 
-      // Töm kundvagnen
       setCart([]);
 
-      // Gör en POST-förfrågan till servern för att genomföra köpet
       const productIds = updatedCart.map((product) => product.id);
       const response = await fetch("http://localhost:3000/checkout", {
         method: "POST",
@@ -68,14 +62,13 @@ function CartPage({ cart, setCart}) {
 
   const clearCart = () => {
     setCart([]);
+    setTimeout(() => {
     navigate("/");
+    }, 1000);
   };
 
   const cartItems = cart.reduce((acc, product) => {
-    // Skapa en kopia av kundvagnsobjektet med ett attribut 'quantity'
     const cartItem = { ...product, quantity: 1 };
-
-    // Kontrollera om produkten redan finns i 'acc'
     const existingProduct = acc.find((p) => p.id === cartItem.id);
 
     if (existingProduct) {

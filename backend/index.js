@@ -12,7 +12,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-// Läs in produktlistan vid start
 let products = [];
 
 try {
@@ -41,7 +40,6 @@ app.get('/product', (req, res) => {
   } catch (e) {
     body = { error: 'Something went wrong' };
   }
-
   res.send(body);
 });
 
@@ -49,7 +47,6 @@ app.post('/checkout', (req, res) => {
   try {
     const { productIds } = req.body;
 
-    // Loopa igenom alla produkt-ID:n och uppdatera lagersaldot för varje produkt
     productIds.forEach((productId) => {
       const product = products.find((p) => p.id === productId);
 
@@ -58,10 +55,8 @@ app.post('/checkout', (req, res) => {
       }
     });
 
-    // Spara ändringarna till produktlistan (till exempel i en JSON-fil)
     fs.writeFileSync('./data/product.json', JSON.stringify(products, null, 2));
 
-    // Skicka ett svar till klienten
     res.json({ message: 'Köpet genomfördes', productIds });
   } catch (error) {
     res.status(500).json({ error: 'Något gick fel' });

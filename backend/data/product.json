@@ -4,28 +4,28 @@
     "name": "Piano",
     "image": "https://images.pexels.com/photos/1021142/pexels-photo-1021142.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "price": 20000,
-    "stock": 20
+    "stock": 15
   },
   {
     "id": 2,
     "name": "Elgitarr",
     "image": "https://images.pexels.com/photos/7334396/pexels-photo-7334396.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "price": 4999,
-    "stock": 4
+    "stock": 7
   },
   {
     "id": 3,
     "name": "Fiol",
     "image": "https://images.pexels.com/photos/11970796/pexels-photo-11970796.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "price": 1699,
-    "stock": 8
+    "stock": 9
   },
   {
     "id": 4,
     "name": "Alto-Saxophone",
     "image": "https://images.pexels.com/photos/164936/pexels-photo-164936.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "price": 10000,
-    "stock": 4
+    "stock": 10
   },
   {
     "id": 5,
@@ -39,6 +39,6 @@
     "name": "Akustiskt Gitarr",
     "image": "https://images.pexels.com/photos/3660866/pexels-photo-3660866.jpeg?auto=compress&cs=tinysrgb&w=1600",
     "price": 2500,
-    "stock": 7
+    "stock": 14
   }
 ]
