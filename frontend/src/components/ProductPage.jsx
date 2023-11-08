@@ -8,7 +8,26 @@ function ProductPage({ cart, setCart }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [latestSearches, setLatestSearches] = useState([]);
+  const [sortOrder, setSortOrder] = useState('ascending'); 
 
+  //Stigande & Fallande ordning
+  function sortProducts(products, order) {
+    const sortedProducts = [...products];
+  
+    sortedProducts.sort((a, b) => {
+      if (order === 'ascending') {
+        return a.price - b.price;
+      } else if (order === 'descending') {
+        return b.price - a.price;
+      } else {
+        return 0;
+      }
+    });
+  
+    return sortedProducts;
+  }
+
+  
   async function fetchProducts() {
     try {
       const response = await fetch("http://localhost:3000/product");
@@ -50,10 +69,21 @@ function ProductPage({ cart, setCart }) {
     setSearchTerm(term);
   };
 
+  const handleSortOrderChange = (event) => {
+    setSortOrder(event.target.value);
+    // Sortera produkterna baserat på den nya ordningen
+    setFilteredProducts(sortProducts(filteredProducts, event.target.value));
+  };
+
   return (
     <div>
       <h1>Produktsida</h1>
+      
       <SearchForm setSearchTerm={handleSearchTerm} />
+      <select className="price" value={sortOrder} onChange={handleSortOrderChange}>
+        <option value="ascending">Stigande pris</option>
+        <option value="descending">Fallande pris</option>
+      </select>
       <LatestSearches latestSearches={latestSearches} setSearchTerm={handleSearchTerm} />
       {status === "loading" && <p>Laddar produkter...</p>}
       {status === "error" && <p>Ett fel uppstod vid hämtningen av produkter.</p>}
