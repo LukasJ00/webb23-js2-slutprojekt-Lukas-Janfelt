@@ -102,3 +102,8 @@ h1{
   align-items: center;
   justify-content: center;
 }
+.price{
+  background-color: rgb(231, 229, 229);
+  display: flex;
+  margin-left: 50%;
+}
